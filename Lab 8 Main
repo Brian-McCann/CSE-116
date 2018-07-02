@@ -1,0 +1,49 @@
+package Lab8;
+import java.util.Scanner;
+public class Main {
+	public static void main(String[] args){
+		Scanner sc = new Scanner(System.in);
+		System.out.println("What operation would you like to perform?");
+		String operation = sc.next();
+		if(operation.toLowerCase().substring(0,1).equals("e")){
+			System.out.println("What is the base?");
+			inValue value1 = new inValue(sc.next());
+			System.out.println("What is the exponent?");
+			inValue value2 = new inValue(sc.next());
+			System.out.println("The answer is:");
+			long time1 = System.nanoTime();
+			inValue expans = value1.exp(value2);
+			System.out.println(expans.getValue());
+			long elapsed = System.nanoTime() - time1;
+			System.out.println("This operation took " + (elapsed*(Math.pow(10, -9))) + " Seconds");
+		}else if(operation.toLowerCase().substring(0,1).equals("a")){
+			System.out.println("What is the first number?");
+			inValue value1 = new inValue(sc.next());
+			System.out.println("What is the second number?");
+			inValue value2 = new inValue(sc.next());
+			System.out.println("The answer is:");
+			long time1 = System.nanoTime();
+			inValue addans =  value1.add(value2);
+			System.out.println(addans.getValue());
+			long elapsed = System.nanoTime() - time1;
+			System.out.println("This operation took " + (elapsed*(Math.pow(10, -9))) + " Seconds");
+		}else if(operation.toLowerCase().substring(0,1).equals("m")){
+			System.out.println("What is the first number?");
+			inValue value1 = new inValue(sc.next());
+			System.out.println("What is the second number?");
+			inValue value2 = new inValue(sc.next());
+			System.out.println("The answer is:");
+			long time1 = System.nanoTime();
+			inValue multans =  value1.mult(value1, value2);
+			System.out.println(multans.getValue());
+			long elapsed = System.nanoTime() - time1;
+			System.out.println("This operation took " + (elapsed*(Math.pow(10, -9))) + " Seconds");
+		}else if(operation.toLowerCase().substring(0,1).equals("h")){
+			System.out.println("Type multiplication if you want to multiply two numbers");
+			System.out.println("Type add if you want to add two numbers");
+			System.out.println("Type exponent if you want to exponentiate two numbers");
+		}else{
+			System.out.println("Error, invalid input, type h for help");
+		}
+	}
+}
