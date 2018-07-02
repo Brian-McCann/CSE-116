@@ -1,0 +1,75 @@
+package Lab8;
+
+public class inValue {
+
+	String myvalue;
+	double mult;
+	double ad;
+	public inValue(String n){
+		myvalue = n;
+	}
+	
+	public String getValue(){
+		return myvalue;
+	}
+	
+	public inValue add(inValue n) {
+		String mytempstring = myvalue;
+		String otherstring = n.getValue();
+		while(otherstring.length() < mytempstring.length())
+		{
+			otherstring = "0" + otherstring;
+	
+		}
+		while(otherstring.length() > mytempstring.length())
+		{
+			mytempstring = "0" + mytempstring;
+			
+		}
+		
+		String newstring = "";
+		int carry = 0;
+		int tempint2 = 0;
+		for(int i=mytempstring.length(); i>0; i--)
+		{
+				tempint2 = (Integer.parseInt(mytempstring.toLowerCase().substring(i-1,i))) + Integer.parseInt(otherstring.toLowerCase().substring(i-1,i))+carry;
+				if(tempint2 > 9){carry = 1; tempint2 = tempint2-10;}else{carry = 0;}
+				newstring = "" + tempint2 + newstring;
+		}
+		if(carry==1){
+			newstring = "1" + newstring;
+		}
+		return new inValue(newstring);
+	}
+	
+	
+	
+	
+	public inValue mult(inValue n, inValue k){
+		inValue first = n;
+		inValue second = k;
+		String otherstring = second.getValue();
+		inValue temp = new inValue("0");
+		int length = otherstring.length();
+		int count=0;
+		for(int i=length; i>0; i--){
+			int sub = ((int) Math.pow(10, count))*Integer.parseInt(otherstring.toLowerCase().substring(i-1,i));
+			for(int j=0; j<sub; j++){
+				temp = temp.add(first);
+			}
+			count +=1;
+		}
+		return temp;
+	}
+	
+	public inValue exp(inValue s){
+		inValue myval = new inValue(myvalue);
+		String mytempstring = s.getValue();
+		inValue temp = myval;
+		double exponent = Double.parseDouble(mytempstring);
+		for(double i=0; i<exponent-1; i++){
+			temp = myval.mult(temp, myval);
+		}
+		return temp;
+	}
+}
